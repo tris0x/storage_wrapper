@@ -1,11 +1,11 @@
-# local_storage
+# Storage Wrapper
 
 A wrapper for shared_preferences and flutter_secure_storage that provides an unified api.
 
 ## How it works
-Calling the `LocalStorage.common()` constructor will return an instance that saves data in the `SharedPreferences` using the `shared_preferences` plugin.
+Calling the `StorageWrapper.common()` constructor will return an instance that saves data in the `SharedPreferences` using the `shared_preferences` plugin.
 
-Calling the `LocalStorage.secure()` constructor will return an instance that saves data securely using the `flutter_secure_storage` plugin.
+Calling the `StorageWrapper.secure()` constructor will return an instance that saves data securely using the `flutter_secure_storage` plugin.
 
 Once you got the instance, you can use the methods:
 * `write`

@@ -1,4 +1,4 @@
-name: local_storage
+name: storage_wrapper
 description: A wrapper for shared_preferences and flutter_secure_storage that provides an unified api.
 version: 1.0.0
 homepage: https://github.com/magicleon94/local_storage

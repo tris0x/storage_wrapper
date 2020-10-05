@@ -6,15 +6,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'common_storage.dart';
 part 'secure_storage.dart';
 
-class LocalStorage {
-  final LocalStorage _storage;
+class StorageWrapper {
+  final StorageWrapper _storage;
 
-  LocalStorage._default() : _storage = _CommonStorage();
+  StorageWrapper._default() : _storage = _CommonStorage();
 
-  LocalStorage.secure()
+  StorageWrapper.secure()
       : _storage = kIsWeb ? _CommonStorage() : _SecureStorage();
 
-  factory LocalStorage.common() => LocalStorage._default();
+  factory StorageWrapper.common() => StorageWrapper._default();
 
   Future<bool> write(
       {@required String key,

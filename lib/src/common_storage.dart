@@ -1,8 +1,8 @@
-part of 'local_storage.dart';
+part of 'storage_wrapper.dart';
 
-class _CommonStorage implements LocalStorage {
+class _CommonStorage implements StorageWrapper {
   @override
-  LocalStorage get _storage => this;
+  StorageWrapper get _storage => this;
 
   @override
   Future<bool> write(
