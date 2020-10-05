@@ -1,0 +1,20 @@
+name: local_storage
+description: A wrapper for shared_preferences and flutter_secure_storage that provides an unified api.
+version: 1.0.0
+homepage: https://github.com/magicleon94/local_storage
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0 <2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_secure_storage: ^3.3.4
+  shared_preferences: ^0.5.12
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
