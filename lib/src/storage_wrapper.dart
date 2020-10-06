@@ -11,9 +11,11 @@ class StorageWrapper {
 
   StorageWrapper._default() : _storage = _CommonStorage();
 
+  ///Creates an instance of a secure local storage manager. Returns a common storage on Web.
   StorageWrapper.secure()
       : _storage = kIsWeb ? _CommonStorage() : _SecureStorage();
 
+  ///Creates an instance of a local storage manager. Returns a common storage on Web.
   factory StorageWrapper.common() => StorageWrapper._default();
 
   ///Write the [value] for the corresponding [key].
