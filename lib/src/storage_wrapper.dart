@@ -16,6 +16,9 @@ class StorageWrapper {
 
   factory StorageWrapper.common() => StorageWrapper._default();
 
+  ///Write the [value] for the corresponding [key].
+  ///Overwrites it if it already exists.
+  ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<bool> write(
       {@required String key,
       @required String value,
@@ -29,6 +32,9 @@ class StorageWrapper {
     );
   }
 
+  ///Read the value corresponding to the [key].
+  ///Returns null for non existing values.
+  ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<String> read({
     @required String key,
     IOSOptions iOptions,
@@ -41,6 +47,8 @@ class StorageWrapper {
     );
   }
 
+  ///Deletes the value corresponding to the [key].
+  ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<bool> delete({
     @required String key,
     IOSOptions iOptions,
@@ -53,6 +61,8 @@ class StorageWrapper {
     );
   }
 
+  ///Returns [true] if the [key] has a corresponding value, [false] otherwise.
+  ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<bool> containsKey(
       {String key, IOSOptions iOptions, AndroidOptions aOptions}) {
     return _storage.containsKey(
