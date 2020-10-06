@@ -1,9 +1,9 @@
-part of 'storage_wrapper.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:storage_wrapper/storage_wrapper.dart';
 
-class _CommonStorage implements StorageWrapper {
-  @override
-  StorageWrapper get _storage => this;
-
+class CommonStorage implements StorageWrapper {
   @override
   Future<bool> write(
       {@required String key,

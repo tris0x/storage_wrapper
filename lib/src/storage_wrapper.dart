@@ -1,19 +1,17 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-part 'common_storage.dart';
-part 'secure_storage.dart';
+import 'getters/getters_stub.dart'
+    if (dart.library.io) 'getters/getters_mobile.dart'
+    if (dart.library.js) 'getters/getters_web.dart';
 
 class StorageWrapper {
   final StorageWrapper _storage;
 
-  StorageWrapper._default() : _storage = _CommonStorage();
+  StorageWrapper._default() : _storage = getCommonStorage();
 
   ///Creates an instance of a secure local storage manager. Returns a common storage on Web.
-  StorageWrapper.secure()
-      : _storage = kIsWeb ? _CommonStorage() : _SecureStorage();
+  StorageWrapper.secure() : _storage = getSecureStorage();
 
   ///Creates an instance of a local storage manager. Returns a common storage on Web.
   factory StorageWrapper.common() => StorageWrapper._default();
