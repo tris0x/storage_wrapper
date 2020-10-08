@@ -1,3 +1,5 @@
+## 1.1.1
+Exposed inner plugins
 ## 1.1.0
 Added Web compatibility
 ## 1.0.0+2
