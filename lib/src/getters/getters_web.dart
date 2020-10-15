@@ -1,5 +1,5 @@
 import 'package:storage_wrapper/src/common_storage.dart';
-import 'package:storage_wrapper/storage_wrapper.dart';
+import 'package:storage_wrapper/src/storage_wrapped.dart';
 
-StorageWrapper getCommonStorage() => CommonStorage();
-StorageWrapper getSecureStorage() => CommonStorage();
+StorageWrapped getCommonStorage() => CommonStorage();
+StorageWrapped getSecureStorage() => CommonStorage();

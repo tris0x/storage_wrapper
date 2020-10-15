@@ -1,20 +1,31 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:storage_wrapper/src/storage_wrapped.dart';
 
 import 'getters/getters_stub.dart'
     if (dart.library.io) 'getters/getters_mobile.dart'
     if (dart.library.js) 'getters/getters_web.dart';
 
 class StorageWrapper {
-  final StorageWrapper _storage;
+  Map<String, String> _mockEntries;
+  Map<String, String> get mockEntries => _mockEntries;
 
-  StorageWrapper._default() : _storage = getCommonStorage();
+  final StorageWrapped _storage;
 
   ///Creates an instance of a secure local storage manager. Returns a common storage on Web.
   StorageWrapper.secure() : _storage = getSecureStorage();
 
   ///Creates an instance of a local storage manager. Returns a common storage on Web.
-  factory StorageWrapper.common() => StorageWrapper._default();
+  StorageWrapper.common() : _storage = getCommonStorage();
+
+  ///Set mock data for testing purposes
+  ///Subsequent calls to this method will not have any effect
+  void enableMock({Map<String, String> initialData}) {
+    _mockEntries ??= initialData ?? {};
+  }
+
+  ///If [mockEntries] is not null it means the storage behavior is being mocked.
+  bool get isMocking => mockEntries != null;
 
   ///Write the [value] for the corresponding [key].
   ///Overwrites it if it already exists.
@@ -24,6 +35,9 @@ class StorageWrapper {
       @required String value,
       IOSOptions iOptions,
       AndroidOptions aOptions}) async {
+    if (isMocking) {
+      mockEntries[key] = value;
+    }
     return _storage.write(
       key: key,
       value: value,
@@ -40,6 +54,9 @@ class StorageWrapper {
     IOSOptions iOptions,
     AndroidOptions aOptions,
   }) async {
+    if (isMocking) {
+      return mockEntries[key];
+    }
     return _storage.read(
       key: key,
       iOptions: iOptions,
@@ -54,6 +71,9 @@ class StorageWrapper {
     IOSOptions iOptions,
     AndroidOptions aOptions,
   }) async {
+    if (isMocking) {
+      mockEntries.remove(key);
+    }
     return _storage.delete(
       key: key,
       iOptions: iOptions,
@@ -64,7 +84,10 @@ class StorageWrapper {
   ///Returns [true] if the [key] has a corresponding value, [false] otherwise.
   ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<bool> containsKey(
-      {String key, IOSOptions iOptions, AndroidOptions aOptions}) {
+      {String key, IOSOptions iOptions, AndroidOptions aOptions}) async {
+    if (isMocking) {
+      return mockEntries.containsKey(key);
+    }
     return _storage.containsKey(
       key: key,
       iOptions: iOptions,
