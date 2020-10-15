@@ -1,6 +1,6 @@
 name: storage_wrapper
 description: A wrapper for shared_preferences and flutter_secure_storage that provides an unified api and a convenient mocking interface.
-version: 1.2.0
+version: 1.2.1
 homepage: https://github.com/magicleon94/local_storage
 
 environment:

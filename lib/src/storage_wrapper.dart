@@ -37,6 +37,7 @@ class StorageWrapper {
       AndroidOptions aOptions}) async {
     if (isMocking) {
       mockEntries[key] = value;
+      return true;
     }
     return _storage.write(
       key: key,
@@ -73,6 +74,7 @@ class StorageWrapper {
   }) async {
     if (isMocking) {
       mockEntries.remove(key);
+      return true;
     }
     return _storage.delete(
       key: key,

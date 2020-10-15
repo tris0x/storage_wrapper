@@ -1,3 +1,5 @@
+## 1.2.1
+Bugfix
 ## 1.2.0
 Added mocking capability
 ## 1.1.1
