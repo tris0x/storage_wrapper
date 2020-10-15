@@ -45,3 +45,9 @@ You can always manipulate the data by accessing the `mockEntries` property.
 The package wraps:
 * https://pub.dev/packages/flutter_secure_storage
 * https://pub.dev/packages/shared_preferences/
+
+## Web support
+The package works for Web too.
+
+When using Flutter Web, `CommonStorage` is used for both `common` and `secure` modes.
+It's probably because pub.dev does not recognise compatibility with Web because `flutter_secure_storage` is not.
