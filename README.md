@@ -20,6 +20,9 @@ They all take the following parameters:
 
 While the `AndroidOptions` do not seem to be used by `flutter_secure_storage`, you can find more information about the `IOSOptions` [here](https://github.com/mogol/flutter_secure_storage/blob/f99c4efbff499a80ad9de08d227d766f832f825a/lib/flutter_secure_storage.dart#L118).
 
+**Note** as for version `1.3.0` you can pass `iOptions` and `aOptions` to the `StorageWrapper.secure()` constructor to avoid passing the same options over and over again.<br>
+The options passed to the single methods will override the instance ones, though.
+
 ## Mocking values for testing
 You can call the `enableMock` method passing an optional `Map<String,String>` for initial values. If nothing is passed, the storage will stay in mocking mode (the `isMocking` will be true) anyway but without any initial data, that will be defaulted to an empty `Map<String,String>`.
 

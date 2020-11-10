@@ -11,12 +11,20 @@ class StorageWrapper {
   Map<String, String> get mockEntries => _mockEntries;
 
   final StorageWrapped _storage;
+  final AndroidOptions _androidOptions;
+  final IOSOptions _iosOptions;
 
   ///Creates an instance of a secure local storage manager. Returns a common storage on Web.
-  StorageWrapper.secure() : _storage = getSecureStorage();
+  StorageWrapper.secure({AndroidOptions aOptions, IOSOptions iOptions})
+      : _storage = getSecureStorage(),
+        _androidOptions = aOptions,
+        _iosOptions = iOptions;
 
   ///Creates an instance of a local storage manager. Returns a common storage on Web.
-  StorageWrapper.common() : _storage = getCommonStorage();
+  StorageWrapper.common()
+      : _storage = getCommonStorage(),
+        _androidOptions = null,
+        _iosOptions = null;
 
   ///Set mock data for testing purposes
   ///Subsequent calls to this method will not have any effect
@@ -42,8 +50,8 @@ class StorageWrapper {
     return _storage.write(
       key: key,
       value: value,
-      iOptions: iOptions,
-      aOptions: aOptions,
+      iOptions: iOptions ?? _iosOptions,
+      aOptions: aOptions ?? _androidOptions,
     );
   }
 
@@ -60,8 +68,8 @@ class StorageWrapper {
     }
     return _storage.read(
       key: key,
-      iOptions: iOptions,
-      aOptions: aOptions,
+      iOptions: iOptions ?? _iosOptions,
+      aOptions: aOptions ?? _androidOptions,
     );
   }
 
@@ -78,8 +86,8 @@ class StorageWrapper {
     }
     return _storage.delete(
       key: key,
-      iOptions: iOptions,
-      aOptions: aOptions,
+      iOptions: iOptions ?? _iosOptions,
+      aOptions: aOptions ?? _androidOptions,
     );
   }
 
@@ -92,8 +100,8 @@ class StorageWrapper {
     }
     return _storage.containsKey(
       key: key,
-      iOptions: iOptions,
-      aOptions: aOptions,
+      iOptions: iOptions ?? _iosOptions,
+      aOptions: aOptions ?? _androidOptions,
     );
   }
 }

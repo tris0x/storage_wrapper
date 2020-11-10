@@ -1,3 +1,5 @@
+## 1.3.0
+Added the possibility to specify IOSOptions and AndroidOptions in the secure constructor.
 ## 1.2.1+1
 Readme updated
 ## 1.2.1
