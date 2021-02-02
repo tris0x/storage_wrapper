@@ -12,6 +12,8 @@ Once you got the instance, you can use the methods:
 * `read`
 * `delete`
 * `containsKey`
+* `getAll`
+* `deleteAll`
 
 They all take the following parameters:
 * `key`: a `String` identifying the key of the value

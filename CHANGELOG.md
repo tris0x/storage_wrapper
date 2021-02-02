@@ -1,3 +1,5 @@
+## 1.3.1+1
+Readme updated.
 ## 1.3.1
 Added getAll and deleteAll. ([#1](https://github.com/magicleon94/storage_wrapper/issues/1))
 ## 1.3.0
