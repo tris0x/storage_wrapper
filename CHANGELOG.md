@@ -1,3 +1,5 @@
+## 1.3.1
+Added getAll and deleteAll. ([#1](https://github.com/magicleon94/storage_wrapper/issues/1))
 ## 1.3.0
 Added the possibility to specify IOSOptions and AndroidOptions in the secure constructor.
 ## 1.2.1+1

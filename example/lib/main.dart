@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -27,6 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
   String secureValue;
   final commonStorage = StorageWrapper.common();
   final secureStorage = StorageWrapper.secure();
+  String allCommon;
+  String allSecure;
 
   void writeRandom() async {
     final int random = Random().nextInt(100);
@@ -37,6 +40,18 @@ class _MyHomePageState extends State<MyHomePage> {
   void readValues() async {
     commonValue = await commonStorage.read(key: 'common');
     secureValue = await secureStorage.read(key: 'secure');
+    setState(() {});
+  }
+
+  void clearAll() async {
+    await commonStorage.deleteAll();
+    await secureStorage.deleteAll();
+    readValues();
+  }
+
+  void getAll() async {
+    allCommon = jsonEncode(await commonStorage.getAll());
+    allSecure = jsonEncode(await secureStorage.getAll());
     setState(() {});
   }
 
@@ -56,8 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'Common value: $commonValue',
             ),
+            Text('All commons: $allCommon'),
+            Text('All secure: $allSecure'),
             ElevatedButton(onPressed: writeRandom, child: Text('Write random')),
             ElevatedButton(onPressed: readValues, child: Text('Read values')),
+            ElevatedButton(onPressed: clearAll, child: Text('Clear values')),
+            ElevatedButton(onPressed: getAll, child: Text('Get all values')),
           ],
         ),
       ),

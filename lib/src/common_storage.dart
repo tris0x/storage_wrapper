@@ -38,4 +38,20 @@ class CommonStorage implements StorageWrapped {
     final prefs = await SharedPreferences.getInstance();
     return prefs.containsKey(key);
   }
+
+  @override
+  Future<bool> deleteAll({IOSOptions iOptions, AndroidOptions aOptions}) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.clear();
+  }
+
+  @override
+  Future<Map<String, dynamic>> getAll(
+      {IOSOptions iOptions, AndroidOptions aOptions}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final keys = prefs.getKeys();
+    return {
+      for (final key in keys) key: prefs.get(key),
+    };
+  }
 }

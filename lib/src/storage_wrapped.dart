@@ -25,4 +25,14 @@ abstract class StorageWrapped {
     IOSOptions iOptions,
     AndroidOptions aOptions,
   });
+
+  Future<bool> deleteAll({
+    IOSOptions iOptions,
+    AndroidOptions aOptions,
+  });
+
+  Future<Map<String, dynamic>> getAll({
+    IOSOptions iOptions,
+    AndroidOptions aOptions,
+  });
 }

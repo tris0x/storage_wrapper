@@ -104,4 +104,35 @@ class StorageWrapper {
       aOptions: aOptions ?? _androidOptions,
     );
   }
+
+  ///Returns [true] is all the values are successfully deleted.
+  ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
+  Future<bool> deleteAll({
+    IOSOptions iOptions,
+    AndroidOptions aOptions,
+  }) async {
+    if (isMocking) {
+      mockEntries.clear();
+      return true;
+    }
+    return _storage.deleteAll(
+      iOptions: iOptions ?? _iosOptions,
+      aOptions: aOptions ?? _androidOptions,
+    );
+  }
+
+  ///Returns a `Map<String,dynamic>` with all the entries of the storage.
+  ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
+  Future<Map<String, dynamic>> getAll({
+    IOSOptions iOptions,
+    AndroidOptions aOptions,
+  }) async {
+    if (isMocking) {
+      return mockEntries;
+    }
+    return _storage.getAll(
+      iOptions: iOptions ?? _iosOptions,
+      aOptions: aOptions ?? _androidOptions,
+    );
+  }
 }

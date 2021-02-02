@@ -65,4 +65,33 @@ class SecureStorage implements StorageWrapped {
     final storage = FlutterSecureStorage();
     return storage.containsKey(key: key);
   }
+
+  @override
+  Future<bool> deleteAll({IOSOptions iOptions, AndroidOptions aOptions}) async {
+    final storage = FlutterSecureStorage();
+    try {
+      await storage.deleteAll(
+        iOptions: iOptions,
+        aOptions: aOptions,
+      );
+      return true;
+    } on PlatformException catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> getAll(
+      {IOSOptions iOptions, AndroidOptions aOptions}) async {
+    final storage = FlutterSecureStorage();
+    try {
+      final result = await storage.readAll(
+        iOptions: iOptions,
+        aOptions: aOptions,
+      );
+      return result;
+    } on PlatformException catch (_) {
+      return {};
+    }
+  }
 }
