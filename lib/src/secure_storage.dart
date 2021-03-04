@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:storage_wrapper/src/storage_wrapped.dart';
@@ -7,10 +6,10 @@ import 'package:storage_wrapper/storage_wrapper.dart';
 class SecureStorage implements StorageWrapped {
   @override
   Future<bool> write(
-      {@required String key,
-      @required String value,
-      IOSOptions iOptions,
-      AndroidOptions aOptions}) async {
+      {required String key,
+      required String value,
+      IOSOptions? iOptions,
+      AndroidOptions? aOptions}) async {
     var storage = FlutterSecureStorage();
     try {
       await storage.write(
@@ -26,11 +25,8 @@ class SecureStorage implements StorageWrapped {
   }
 
   @override
-  Future<String> read(
-      {String key,
-      String value,
-      IOSOptions iOptions,
-      AndroidOptions aOptions}) {
+  Future<String?> read(
+      {required String key, IOSOptions? iOptions, AndroidOptions? aOptions}) {
     var storage = FlutterSecureStorage();
     try {
       return storage.read(
@@ -39,13 +35,15 @@ class SecureStorage implements StorageWrapped {
         aOptions: aOptions,
       );
     } on PlatformException catch (_) {
-      return null;
+      return Future<String?>.value(null);
     }
   }
 
   @override
   Future<bool> delete(
-      {String key, IOSOptions iOptions, AndroidOptions aOptions}) async {
+      {required String key,
+      IOSOptions? iOptions,
+      AndroidOptions? aOptions}) async {
     final storage = FlutterSecureStorage();
     try {
       await storage.delete(
@@ -61,13 +59,16 @@ class SecureStorage implements StorageWrapped {
 
   @override
   Future<bool> containsKey(
-      {String key, IOSOptions iOptions, AndroidOptions aOptions}) async {
+      {required String key,
+      IOSOptions? iOptions,
+      AndroidOptions? aOptions}) async {
     final storage = FlutterSecureStorage();
     return storage.containsKey(key: key);
   }
 
   @override
-  Future<bool> deleteAll({IOSOptions iOptions, AndroidOptions aOptions}) async {
+  Future<bool> deleteAll(
+      {IOSOptions? iOptions, AndroidOptions? aOptions}) async {
     final storage = FlutterSecureStorage();
     try {
       await storage.deleteAll(
@@ -82,7 +83,7 @@ class SecureStorage implements StorageWrapped {
 
   @override
   Future<Map<String, dynamic>> getAll(
-      {IOSOptions iOptions, AndroidOptions aOptions}) async {
+      {IOSOptions? iOptions, AndroidOptions? aOptions}) async {
     final storage = FlutterSecureStorage();
     try {
       final result = await storage.readAll(

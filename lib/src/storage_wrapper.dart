@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:storage_wrapper/src/storage_wrapped.dart';
 
@@ -7,15 +6,15 @@ import 'getters/getters_stub.dart'
     if (dart.library.js) 'getters/getters_web.dart';
 
 class StorageWrapper {
-  Map<String, String> _mockEntries;
-  Map<String, String> get mockEntries => _mockEntries;
+  Map<String, String>? _mockEntries;
+  Map<String, String>? get mockEntries => _mockEntries;
 
   final StorageWrapped _storage;
-  final AndroidOptions _androidOptions;
-  final IOSOptions _iosOptions;
+  final AndroidOptions? _androidOptions;
+  final IOSOptions? _iosOptions;
 
   ///Creates an instance of a secure local storage manager. Returns a common storage on Web.
-  StorageWrapper.secure({AndroidOptions aOptions, IOSOptions iOptions})
+  StorageWrapper.secure({AndroidOptions? aOptions, IOSOptions? iOptions})
       : _storage = getSecureStorage(),
         _androidOptions = aOptions,
         _iosOptions = iOptions;
@@ -28,7 +27,7 @@ class StorageWrapper {
 
   ///Set mock data for testing purposes
   ///Subsequent calls to this method will not have any effect
-  void enableMock({Map<String, String> initialData}) {
+  void enableMock({Map<String, String>? initialData}) {
     _mockEntries ??= initialData ?? {};
   }
 
@@ -39,12 +38,12 @@ class StorageWrapper {
   ///Overwrites it if it already exists.
   ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<bool> write(
-      {@required String key,
-      @required String value,
-      IOSOptions iOptions,
-      AndroidOptions aOptions}) async {
+      {required String key,
+      required String value,
+      IOSOptions? iOptions,
+      AndroidOptions? aOptions}) async {
     if (isMocking) {
-      mockEntries[key] = value;
+      mockEntries![key] = value;
       return true;
     }
     return _storage.write(
@@ -58,13 +57,13 @@ class StorageWrapper {
   ///Read the value corresponding to the [key].
   ///Returns null for non existing values.
   ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
-  Future<String> read({
-    @required String key,
-    IOSOptions iOptions,
-    AndroidOptions aOptions,
+  Future<String?> read({
+    required String key,
+    IOSOptions? iOptions,
+    AndroidOptions? aOptions,
   }) async {
     if (isMocking) {
-      return mockEntries[key];
+      return mockEntries![key];
     }
     return _storage.read(
       key: key,
@@ -76,12 +75,12 @@ class StorageWrapper {
   ///Deletes the value corresponding to the [key].
   ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<bool> delete({
-    @required String key,
-    IOSOptions iOptions,
-    AndroidOptions aOptions,
+    required String key,
+    IOSOptions? iOptions,
+    AndroidOptions? aOptions,
   }) async {
     if (isMocking) {
-      mockEntries.remove(key);
+      mockEntries!.remove(key);
       return true;
     }
     return _storage.delete(
@@ -94,9 +93,11 @@ class StorageWrapper {
   ///Returns [true] if the [key] has a corresponding value, [false] otherwise.
   ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<bool> containsKey(
-      {String key, IOSOptions iOptions, AndroidOptions aOptions}) async {
+      {required String key,
+      IOSOptions? iOptions,
+      AndroidOptions? aOptions}) async {
     if (isMocking) {
-      return mockEntries.containsKey(key);
+      return mockEntries!.containsKey(key);
     }
     return _storage.containsKey(
       key: key,
@@ -108,11 +109,11 @@ class StorageWrapper {
   ///Returns [true] is all the values are successfully deleted.
   ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<bool> deleteAll({
-    IOSOptions iOptions,
-    AndroidOptions aOptions,
+    IOSOptions? iOptions,
+    AndroidOptions? aOptions,
   }) async {
     if (isMocking) {
-      mockEntries.clear();
+      mockEntries!.clear();
       return true;
     }
     return _storage.deleteAll(
@@ -124,11 +125,11 @@ class StorageWrapper {
   ///Returns a `Map<String,dynamic>` with all the entries of the storage.
   ///For secure storage, [iOptions] and [aOptions] allow more control on the data access policy.
   Future<Map<String, dynamic>> getAll({
-    IOSOptions iOptions,
-    AndroidOptions aOptions,
+    IOSOptions? iOptions,
+    AndroidOptions? aOptions,
   }) async {
     if (isMocking) {
-      return mockEntries;
+      return mockEntries!;
     }
     return _storage.getAll(
       iOptions: iOptions ?? _iosOptions,
