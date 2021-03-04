@@ -1,3 +1,5 @@
+## 2.0.0
+**Breaking change** Added sound null safety.
 ## 1.3.1+1
 Readme updated.
 ## 1.3.1
