@@ -1,3 +1,5 @@
+## 3.0.0
+null safety added. Updated minimum SDK to 2.12.0 
 ## 2.0.0
 **Breaking change** Added sound null safety.
 ## 1.3.1+1

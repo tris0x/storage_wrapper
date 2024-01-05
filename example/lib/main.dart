@@ -24,12 +24,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String commonValue;
-  String secureValue;
+  String commonValue = '';
+  String secureValue = '';
   final commonStorage = StorageWrapper.common();
   final secureStorage = StorageWrapper.secure();
-  String allCommon;
-  String allSecure;
+  String allCommon = '';
+  String allSecure = '';
 
   void writeRandom() async {
     final int random = Random().nextInt(100);
@@ -38,8 +38,20 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void readValues() async {
-    commonValue = await commonStorage.read(key: 'common');
-    secureValue = await secureStorage.read(key: 'secure');
+    String? result;
+    result = await commonStorage.read(key: 'common');
+    if (result != null) {
+      commonValue = result;
+    } else {
+      commonValue = '';
+    }
+
+    result = await secureStorage.read(key: 'secure');
+    if (result != null) {
+      secureValue = result;
+    } else {
+      secureValue = '';
+    }
     setState(() {});
   }
 

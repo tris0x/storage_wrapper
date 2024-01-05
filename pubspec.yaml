@@ -1,17 +1,17 @@
 name: storage_wrapper
-description: A wrapper for shared_preferences and flutter_secure_storage that provides an unified api and a convenient mocking interface.
-version: 2.0.0
-homepage: https://github.com/magicleon94/local_storage
+description: A wrapper for shared_preferences and flutter_secure_storage that provides an unified api and a convenient mocking interface. Original Source at https://github.com/magicleon94/storage_wrapper
+version: 3.0.0
+homepage: https://github.com/tris0x/storage_wrapper
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=1.17.0"
+  sdk: '>=2.12.0'
+  flutter: ">=3.16.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_secure_storage: ^4.0.0
-  shared_preferences: ^2.0.3
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
